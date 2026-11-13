@@ -56,39 +56,41 @@
         #result {
             margin-top: 25px;
             font-size: 18px;
-            min-height: 110px;
+            min-height: 140px;
             font-weight: bold;
-            line-height: 1.6;
+            line-height: 1.5;
         }
         .luck-text {
             font-size: 22px;
-            margin-bottom: 5px;
+            margin-bottom: 4px;
         }
         .comment-text {
-            font-size: 14px;
+            font-size: 13px;
             color: #f0f0f0;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             font-weight: normal;
         }
-        .song-box {
+        .song-box, .item-box {
             display: block;
-            margin-top: 5px;
-            font-size: 14px;
+            margin-top: 6px;
+            font-size: 13px;
             background: rgba(0, 0, 0, 0.2);
-            padding: 10px;
+            padding: 8px;
             border-radius: 8px;
             font-weight: normal;
         }
-        /* Apple Musicリンクのスタイル */
         .song-box a {
             color: #ffd700;
             text-decoration: none;
             display: inline-block;
-            margin-top: 4px;
+            margin-top: 2px;
         }
         .song-box a:hover {
             text-decoration: underline;
             color: #ffe44d;
+        }
+        .item-box {
+            color: #ff9ee2;
         }
     </style>
 </head>
@@ -96,7 +98,7 @@
 
     <div class="container">
         <h1>✨ 推し曲おみくじガチャ ✨</h1>
-        <p>ボタンを押して、今日の運勢とおすすめの1曲を占おう！</p>
+        <p>ボタンを押して、今日の運勢とおすすめの1曲、ラッキーアイテムを占おう！</p>
         
         <button id="fortuneButton">占う！</button>
         <div id="result">ここに結果が表示されます</div>
@@ -145,19 +147,38 @@
             }
         ];
 
+        // ご提示いただいたラッキーアイテムのリスト
+        const luckyItems = [
+            "赤いニット",
+            "ゴールドのネックレス",
+            "お気に入りの本",
+            "ピンク色のリップ",
+            "リボンのヘアクリップ",
+            "茶色のスカート",
+            "花のピアス"
+        ];
+
         button.addEventListener('click', () => {
             resultDiv.textContent = "シャッフル中...";
             
             setTimeout(() => {
-                const randomIndex = Math.floor(Math.random() * fortunes.length);
-                const selected = fortunes[randomIndex];
+                // 運勢をランダムで選ぶ
+                const randomFortuneIndex = Math.floor(Math.random() * fortunes.length);
+                const selectedFortune = fortunes[randomFortuneIndex];
+                
+                // ラッキーアイテムをランダムで選ぶ
+                const randomItemIndex = Math.floor(Math.random() * luckyItems.length);
+                const selectedItem = luckyItems[randomItemIndex];
                 
                 resultDiv.innerHTML = `
-                    <div class="luck-text">${selected.luck}</div>
-                    <div class="comment-text">「${selected.comment}」</div>
+                    <div class="luck-text">${selectedFortune.luck}</div>
+                    <div class="comment-text">「${selectedFortune.comment}」</div>
                     <div class="song-box">
                         🎵 おすすめ曲：<br>
-                        <a href="${selected.songUrl}" target="_blank">${selected.songName} ↗</a>
+                        <a href="${selectedFortune.songUrl}" target="_blank">${selectedFortune.songName} ↗</a>
+                    </div>
+                    <div class="item-box">
+                        🛍️ ラッキーアイテム：<br>${selectedItem}
                     </div>
                 `;
             }, 300);
