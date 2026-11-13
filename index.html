@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <!-- スマホ対応に必須のビューポート設定 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>推し曲おみくじ占いアプリ</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #1f1c2c, #928dab);
+            color: #ffffff;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px 20px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            width: 100%;
+            max-width: 400px; /* PCでは広がりすぎないようにする */
+            box-sizing: border-box;
+        }
+        h1 {
+            margin-top: 0;
+            font-size: 22px;
+        }
+        p {
+            color: #ddd;
+            font-size: 13px;
+            margin-bottom: 25px;
+        }
+        button {
+            width: 100%; /* スマホで押しやすいように横幅いっぱいに広げる */
+            padding: 15px 0;
+            font-size: 18px;
+            font-weight: bold;
+            background-color: #ff758c;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(255, 117, 140, 0.4);
+        }
+        button:hover {
+            background-color: #ff7eb3;
+        }
+        #result {
+            margin-top: 25px;
+            font-size: 18px;
+            min-height: 100px;
+            font-weight: bold;
+            line-height: 1.6;
+        }
+        .luck-text {
+            font-size: 22px;
+            margin-bottom: 8px;
+        }
+        .comment-text {
+            font-size: 14px;
+            color: #f0f0f0;
+            margin-bottom: 12px;
+            font-weight: normal;
+        }
+        .song-box {
+            display: block;
+            margin-top: 5px;
+            font-size: 14px;
+            color: #ffd700;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            border-radius: 8px;
+            font-weight: normal;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>✨ 推し曲おみくじガチャ ✨</h1>
+        <p>ボタンを押して、今日の運勢とおすすめの1曲を占おう！</p>
+        
+        <button id="fortuneButton">占う！</button>
+        <div id="result">ここに結果が表示されます</div>
+    </div>
+
+    <script>
+        const button = document.getElementById('fortuneButton');
+        const resultDiv = document.getElementById('result');
+
+        const fortunes = [
+            { 
+                luck: "大吉 🌟", 
+                comment: "今日は何をしても上手くいく最高の1日！", 
+                song: "Yes! 東京 / EBiDAN" 
+            },
+            { 
+                luck: "中吉 ✨", 
+                comment: "ラッキーなことが起こる予感。笑顔を大切に！", 
+                song: "恋、はじめました / =LOVE" 
+            },
+            { 
+                luck: "小吉 ☕", 
+                comment: "温かい飲み物で一息つくと、いいひらめきがあるかも。", 
+                song: "Five / なとり" 
+            },
+            { 
+                luck: "吉 🍀", 
+                comment: "普段通りでOK。マイペースにいこう！", 
+                song: "セレナーデ / なとり" 
+            },
+            { 
+                luck: "末吉 📚", 
+                comment: "新しいことを学ぶのにぴったりの日。", 
+                song: "好きすぎて滅！ / M!LK" 
+            },
+            { 
+                luck: "大凶 🔥", 
+                comment: "逆にレア！ここから運気が急上昇するだけだよ！", 
+                song: "IRIS OUT / 米津玄師" 
+            }
+        ];
+
+        button.addEventListener('click', () => {
+            resultDiv.textContent = "シャッフル中...";
+            
+            setTimeout(() => {
+                const randomIndex = Math.floor(Math.random() * fortunes.length);
+                const selected = fortunes[randomIndex];
+                
+                resultDiv.innerHTML = `
+                    <div class="luck-text">${selected.luck}</div>
+                    <div class="comment-text">「${selected.comment}」</div>
+                    <div class="song-box">🎵 おすすめ曲：<br>${selected.song}</div>
+                `;
+            }, 300);
+        });
+    </script>
+
+</body>
+</html>
