@@ -2,7 +2,6 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <!-- スマホ対応に必須のビューポート設定 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>推し曲おみくじ占いアプリ</title>
     <style>
@@ -26,7 +25,7 @@
             backdrop-filter: blur(10px);
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
             width: 100%;
-            max-width: 400px; /* PCでは広がりすぎないようにする */
+            max-width: 400px;
             box-sizing: border-box;
         }
         h1 {
@@ -39,7 +38,7 @@
             margin-bottom: 25px;
         }
         button {
-            width: 100%; /* スマホで押しやすいように横幅いっぱいに広げる */
+            width: 100%;
             padding: 15px 0;
             font-size: 18px;
             font-weight: bold;
@@ -57,29 +56,39 @@
         #result {
             margin-top: 25px;
             font-size: 18px;
-            min-height: 100px;
+            min-height: 110px;
             font-weight: bold;
             line-height: 1.6;
         }
         .luck-text {
             font-size: 22px;
-            margin-bottom: 8px;
+            margin-bottom: 5px;
         }
         .comment-text {
             font-size: 14px;
             color: #f0f0f0;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             font-weight: normal;
         }
         .song-box {
             display: block;
             margin-top: 5px;
             font-size: 14px;
-            color: #ffd700;
             background: rgba(0, 0, 0, 0.2);
             padding: 10px;
             border-radius: 8px;
             font-weight: normal;
+        }
+        /* Apple Musicリンクのスタイル */
+        .song-box a {
+            color: #ffd700;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 4px;
+        }
+        .song-box a:hover {
+            text-decoration: underline;
+            color: #ffe44d;
         }
     </style>
 </head>
@@ -101,32 +110,38 @@
             { 
                 luck: "大吉 🌟", 
                 comment: "今日は何をしても上手くいく最高の1日！", 
-                song: "Yes! 東京 / EBiDAN" 
+                songName: "Yes! 東京 / EBiDAN",
+                songUrl: "https://music.apple.com/jp/album/yes-%E6%9D%B1%E4%BA%AC-feat-super-dragon-sakurashimeji-one-n-only-buddiis/6793871666" 
             },
             { 
                 luck: "中吉 ✨", 
                 comment: "ラッキーなことが起こる予感。笑顔を大切に！", 
-                song: "恋、はじめました / =LOVE" 
+                songName: "恋、はじめました / =LOVE",
+                songUrl: "https://music.apple.com/jp/song/%E6%81%8B-%E3%81%AF%E3%81%98%E3%82%81%E3%81%be%E3%81%97%E3%81%9F/6792630529" 
             },
             { 
                 luck: "小吉 ☕", 
                 comment: "温かい飲み物で一息つくと、いいひらめきがあるかも。", 
-                song: "Five / なとり" 
+                songName: "Five / 嵐",
+                songUrl: "https://music.apple.com/jp/song/five/1879525016" 
             },
             { 
                 luck: "吉 🍀", 
                 comment: "普段通りでOK。マイペースにいこう！", 
-                song: "セレナーデ / なとり" 
+                songName: "セレナーデ / なとり",
+                songUrl: "https://music.apple.com/jp/song/%E3%82%BB%E3%83%AC%E3%83%8A%E3%83%BC%E3%83%87/1858168846" 
             },
             { 
                 luck: "末吉 📚", 
                 comment: "新しいことを学ぶのにぴったりの日。", 
-                song: "好きすぎて滅！ / M!LK" 
+                songName: "好きすぎて滅！ / M!LK",
+                songUrl: "https://music.apple.com/jp/song/%E5%A5%BD%E3%81%8D%E3%81%99%E3%81%8E%E3%81%A6%E6%BB%85/1846753946" 
             },
             { 
                 luck: "大凶 🔥", 
                 comment: "逆にレア！ここから運気が急上昇するだけだよ！", 
-                song: "IRIS OUT / 米津玄師" 
+                songName: "IRIS OUT / 米津玄師",
+                songUrl: "https://music.apple.com/jp/song/iris-out/1837658529" 
             }
         ];
 
@@ -140,7 +155,10 @@
                 resultDiv.innerHTML = `
                     <div class="luck-text">${selected.luck}</div>
                     <div class="comment-text">「${selected.comment}」</div>
-                    <div class="song-box">🎵 おすすめ曲：<br>${selected.song}</div>
+                    <div class="song-box">
+                        🎵 おすすめ曲：<br>
+                        <a href="${selected.songUrl}" target="_blank">${selected.songName} ↗</a>
+                    </div>
                 `;
             }, 300);
         });
